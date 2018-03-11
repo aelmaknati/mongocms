@@ -43,3 +43,7 @@ node app.js
 
 ## Test
 Open your favorite browser at following URL : http://localhost:1337/cms
+
+*   Login : mongocms
+*   Password : thuvd6552Xf
+
