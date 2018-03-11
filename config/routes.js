@@ -31,14 +31,34 @@ module.exports.routes = {
   * `assets` directory)                                                      *
   *                                                                          *
   ***************************************************************************/
-
-  'get /' : {
+  'get /' : "/cms",
+  'get /cms' : {
     controller: 'CMSController',
     action: 'listFiles'
   },
-  'post /files' : {
+  'get /cms/:node' : {
+    controller: 'CMSController',
+    action: 'listFiles'
+  },
+  'get /cms/:node/delete' : {
+    controller: 'CMSController',
+    action: 'deleteFile'
+  },
+  'get /cms/:node/checkout' : {
+    controller: 'CMSController',
+    action: 'checkoutFile'
+  },
+  'get /cms/:node/checkin' : {
+    controller: 'CMSController',
+    action: 'checkinFile'
+  },
+  'post /cms/file' : {
     controller: 'CMSController',
     action: 'addFile'
+  },
+  'post /cms/dir' : {
+    controller: 'CMSController',
+    action: 'addDir'
   }
 
   /***************************************************************************

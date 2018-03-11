@@ -1,104 +1,16 @@
-#menu th.day {
- text-align: center;
-  background-color: #484848;
-  padding : 20px;
-  color : #fff;
-}
-
-#menu td.item {
-  background-color: #484848;
-  color : #fff;
-  vertical-align : middle;
-  text-align: right;
-  padding : 0 25px;
-}
-
-#menu td.dish {
-  padding : 0;
-}
-
-#menu td.dish .twitter-typeahead {
-  width : 100%;
-}
-
-#menu td.dish .tt-hint{
-  color : #ccc;
-}
-
-#menu td.dish textarea {
-  width : 100%;
-  border: none;
-  height: 65px;
-  text-align: center;
-  resize: none;
-}
-
-#menu td.dish .tt-menu {
-  padding : 10px;
-  border : solid 1px #bbb;
-  border-radius: 5px;
-  background-color: #fff;
-}
-#menu td.dish .tt-menu .tt-suggestion {
-  padding : 5px;
-  cursor: pointer;
-}
-
-#menu td.dish .tt-menu .tt-suggestion:hover {
- color : #2b81af;
-}
-
-
-
-#menu td.dish textarea:hover {
-  background-color: #efefef;
-  cursor: pointer;
-}
-
-#menu td.dish textarea:hover:focus {
-  background-color: transparent;
-}
-
-#menu-action {
-  position: fixed;
-  padding: 10px 30px;
-  bottom: 0;
-  width : 100%;
-}
-
-#menu-action input{
-  float : right;
-  margin-right:15px;
-}
-
-#menu .cat {
+#breadcrumb a{
+  display: inline-block;
+  padding: 5px;
+  min-width: 20px;
   text-align: center;
 }
 
-a.change-day {
-  background-color: #fff;
-  border-radius: 30px;
-  font-size: 20px;
-  padding: 10px;
-  width: 45px;
-  height: 45px;
-  display: none;
+#breadcrumb a:hover{
+  background-color: #eee;
 }
 
-@media screen and (max-width: 780px) {
-  #menu .day-2 , #menu .day-3 , #menu .day-4, #menu .day-5 , #menu .day-6 , #menu .day-7 {
-    display : none;
-  }
-  #menu .item {
-    width : 50px;
-  }
-
-  #menu .cat {
-    text-align: right;
-  }
-
-  a.change-day {
-    display : inline-block;
-  }
+#about{
+  font-size: 30px;
+  float: right;
+  color: #fff;
 }
-

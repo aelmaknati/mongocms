@@ -8,10 +8,15 @@
  * For more information on bootstrapping your app, check out:
  * http://sailsjs.org/#!/documentation/reference/sails.config/sails.config.bootstrap.html
  */
-
+var mongodb = require('mongodb');
+var Grid = require('gridfs-stream');
 module.exports.bootstrap = function(cb) {
 
   // It's very important to trigger this callback method when you are finished
   // with the bootstrap!  (otherwise your server will never lift, since it's waiting on the bootstrap)
-  cb();
+  mongodb.MongoClient.connect("mongodb://localhost:27017/mongocms" ,function(err, db) {
+    global.gfs = Grid(db, mongodb);
+    global.db = db.db("mongocms");
+    cb();
+  });
 };

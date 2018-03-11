@@ -1,9 +1,9 @@
 {
   "name": "mongocms",
   "private": true,
-  "version": "0.0.0",
-  "description": "a Sails application",
-  "keywords": [],
+  "version": "0.0.1",
+  "description": "CMS prototype based on MongoDB and GridFS",
+  "keywords": ["ECM" , "CMS" , "MongoDB" , "GridFS" ],
   "dependencies": {
     "ejs": "2.3.4",
     "grunt": "1.0.1",
@@ -22,7 +22,6 @@
     "rc": "1.0.1",
     "sails": "~0.12.14",
     "sails-disk": "~0.10.9",
-    "skipper-gridfs" : "*",
     "sails-mongo" : "*",
     "gridfs-stream" : "*"
   },
@@ -35,6 +34,6 @@
     "type": "git",
     "url": "git://github.com/anonymous node/sails user/mongocms.git"
   },
-  "author": "anonymous node/sails user",
-  "license": ""
+  "author": "Abdellatif El Maknati - abdellatif.elmaknati@amplexor.com",
+  "license": "N/A"
 }

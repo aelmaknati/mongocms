@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%=typeof title == 'undefined' ? 'New Sails App' : title%></title>
+    <title>MongoCMS</title>
 
     <!-- Viewport mobile tag for sensible mobile support -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -37,9 +37,18 @@
   </head>
 
   <body>
+  <nav class="navbar" style="background: #333">
+    <div style="padding: 5px">
+      <img src="/images/icon.png" width="40"/>
+      <span style="font-size: 25px;font-weight: bold;color: #fff;vertical-align: top;">MongoCMS</span>
+      <a id="about" href="#" data-toggle="modal" data-target="#aboutModal" >
+        <i class="glyphicon glyphicon-question-sign"></i>
+      </a>
+    </div>
+  </nav>
     <div class="container">
-      <h2>MongoDB based CMS prototype</h2>
       <%- body %>
+      <%-include aboutmodal %>
     </div>
 
 

@@ -1,44 +1,107 @@
+<%
+  var node = req.params.node ? req.params.node : ""
+  var flash = req.session.flash;
+  var keyword = req.query.keyword ? req.query.keyword : ""
+%>
+
+
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#uploadFileModal">
-  Upload file
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="uploadFileModal" tabindex="-1" role="dialog" aria-labelledby="uploadFileModal" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <form action="/files" method="POST" enctype="multipart/form-data">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-
-            <div class="form-group">
-              <input type="file" name="file" class="form-control">
-            </div>
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <input type="submit" class="btn btn-primary" value="Upload">
-        </div>
-      </form>
-    </div>
+<div class="row">
+  <div class="col-md-6 col-sm-6">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#uploadFileModal">
+      Upload file
+    </button>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addDirModal">
+      Create directory
+    </button>
   </div>
+  <div class="col-md-6 col-sm-6" style="float: right">
+    <form action="/cms" method="get">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search for..." name="keyword" value="<%=keyword %>" >
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="submit">Go!</button>
+        </span>
+      </div><!-- /input-group -->
+    </form>
+  </div><!-- /.col-lg-6 -->
 </div>
-<table>
-  <tbody>
-  <% for (var i = 0 ; i<files.length ; i++){ %>
-    <tr>
-      <td>files[i].name</td>
-      <td>files[i].size</td>
-      <td>files[i].version</td>
-      <td>files[i].status</td>
-    </tr>
-  <% } %>
-  </tbody>
-</table>
+<hr/>
+<% if (flash){%>
+  <% req.session.flash = undefined %>
+  <div class="alert alert-danger" role="alert">
+    <%=flash.error %>
+  </div>
+<%}%>
+<div class="row" id="breadcrumb">
+<% if (!keyword) {%>
 
+  <a href="/cms">/</a>
+  <% for (var i = 0 ; i < req.options.path.length ; i++){ %>
+    <a href="/cms/<%=req.options.path[i]._id %>"><%=req.options.path[i].filename.replace(/^.*[\\\/]/, '') %></a> /
+  <%}%>
+<%}else {%>
+  <a href="/cms">Reset filters</a>
+<%} %>
+</div>
+
+<div class="row">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Name</th>
+        <th>Creation date</th>
+        <th>Version</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if(req.options.path.length > 0){%>
+        <tr>
+          <td></td>
+          <td>
+            <% if(req.options.path.length > 1){%>
+              <a href="/cms/<%=req.options.path[req.options.path.length-2]._id%>" style="font-weight: bold" >..</a>
+            <%}else {%>
+              <a href="/cms" style="font-weight: bold" >..</a>
+            <%}%>
+          </td>
+        </tr>
+      <%}%>
+      <% for (var i = 0 ; i<files.length ; i++){ %>
+        <tr>
+          <td>
+            <% if (files[i].contentType != "dir"){%>
+              <a href="/cms/<%=files[i].versions[0]._id%>" target="_blank">View</a> |
+            <%}else{%>
+            <a href="/cms/<%=files[i].versions[0]._id%>">Browse</a> |
+            <%}%>
+            <% if (files[i].contentType != "dir"){%>
+              <% if(files[i].versions[0].metadata.checkout){%>
+                <a href="/cms/<%=files[i].versions[0]._id%>/checkin">Checkin</a> |
+              <%}else{%>
+                <a href="/cms/<%=files[i].versions[0]._id%>/checkout">Checkout</a> |
+              <%}%>
+            <%}%>
+            <a href="/cms/<%=files[i].versions[0]._id%>/delete?versions=last">
+              Delete
+            </a>
+
+          </td>
+          <td>
+            <a href="/cms/<%=files[i].versions[0]._id%>">
+              <% if (files[i].versions[0].metadata.checkout){%>
+                <i class="glyphicon glyphicon-lock"></i>
+              <%}%>
+              <%=files[i]._id.replace(/^.*[\\\/]/, '')%>
+            </a>
+          </td>
+          <td><%=files[i].versions[0].uploadDate %></td>
+          <td><%=files[i].versions.length %></td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+</div>
+<%-include adddirmodal%>
+<%-include addfilemodal%>
