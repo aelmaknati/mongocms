@@ -31,6 +31,11 @@ module.exports.routes = {
   * `assets` directory)                                                      *
   *                                                                          *
   ***************************************************************************/
+  'get /login' : {view : "login" , locals : {layout : false}},
+  'post /login' : {
+    controller: 'CMSController',
+    action: 'login'
+  },
   'get /' : "/cms",
   'get /cms' : {
     controller: 'CMSController',

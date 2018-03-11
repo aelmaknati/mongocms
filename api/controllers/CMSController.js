@@ -10,6 +10,15 @@ var fs = require('fs');
 
 module.exports = {
 
+  login : function(req , res){
+    if(req.body.login == "mongocms" && req.body.password == "thuvd6552Xf"){
+      req.session.authenticated = true
+      res.redirect("/cms")
+    }else{
+      res.redirect("/login")
+    }
+  },
+
   /**
    * List files in a node
    * @requestparam node (URL param)  : Id of the node
